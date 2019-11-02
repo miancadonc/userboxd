@@ -3,6 +3,7 @@ class UserboxdController
     VALID_INPUT = ['help', 'add user', 'display users', 'user info', 'compare users', 'exit']
 
     def start
+        User.create(mianc)
         greeting
         menu_prompt
     end
@@ -82,7 +83,14 @@ class UserboxdController
     end
 
     def add_user
-        puts "add user"
+        puts "Please enter a letterboxd username:"
+        username = gets.strip
+        if User.exists?(username)
+            puts "Youv'e already added that user!"
+            input
+        else
+            User.create(username)
+        end
     end
 
     def display_users
