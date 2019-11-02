@@ -1,1 +1,1 @@
-require_relative '../lib/userboxd/cli'
+require_relative '../lib/models/userboxd_controller'
