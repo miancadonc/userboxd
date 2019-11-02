@@ -5,7 +5,6 @@ class UserboxdController
     def start
         greeting
         menu_prompt
-        exit
     end
 
     def greeting
@@ -15,7 +14,6 @@ class UserboxdController
     end
 
     def menu_prompt
-        puts "What do you want to do?"
         puts "You can add a user, display your users," 
         puts "display one user's info, compare two users,"
         puts "or exit the program."
@@ -25,6 +23,7 @@ class UserboxdController
     end
 
     def input
+        puts "What would you like to do?"
         input = gets.strip.downcase
         valid_input?(input)
     end
@@ -54,6 +53,17 @@ class UserboxdController
     end
 
     def invalid_input
+        puts "I'm sorry, but I didn't understand what you wrote."
+        puts "Would you like some help? (y/n)"
+        answer = gets.strip.downcase
+        if answer == "y" || answer == "yes"
+            help
+        elsif answer == "n" || answer == "no"
+            puts "Okay."
+            input
+        else
+            invalid_input
+        end
     end
 
     def exit
@@ -61,7 +71,14 @@ class UserboxdController
     end
 
     def help
-        puts "display help message"
+        puts "Here's a list of viable commands."
+        puts "display users"
+        puts "add user"
+        puts "user info"
+        puts "compare users"
+        puts "help"
+        puts "exit"
+        input
     end
 
     def add_user
