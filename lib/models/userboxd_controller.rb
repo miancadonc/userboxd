@@ -19,11 +19,11 @@ class UserboxdController
         puts "display one user's info, compare two users,"
         puts "or exit the program."
         puts "You can also type help for help typing the commands."
-        puts "-----------------------------------------"
         input
     end
 
     def input
+        puts "-----------------------------------------"
         puts "What would you like to do?"
         input = gets.strip.downcase
         valid_input?(input)
@@ -56,9 +56,14 @@ class UserboxdController
     def invalid_input
         puts "I'm sorry, but I didn't understand what you wrote."
         puts "Would you like some help? (y/n)"
+        help if get_answer == "y"
+
+    end
+
+    def get_answer
         answer = gets.strip.downcase
         if answer == "y" || answer == "yes"
-            help
+            "y"
         elsif answer == "n" || answer == "no"
             puts "Okay."
             input
@@ -66,6 +71,7 @@ class UserboxdController
             invalid_input
         end
     end
+
 
     def exit
         puts "Goodbye!"
@@ -88,11 +94,16 @@ class UserboxdController
         if User.exists?(username) 
             puts "Youv'e already added that user!"
             input
-        else #add elsif to check whether username exists
+        # elsif User.new(username).valid? == false
+        #     puts "Looks like that user doesn't exit!"
+        #     puts "Would you like to add another user? (y/n)"
+        #     add_user if get_answer == "y"
+        else 
             User.create(username)
             puts "#{username} added."
             puts "-----------------------------------------"
-            input
+            puts "Would you like to add another user? (y/n)"
+            add_user if get_answer == "y"
         end
     end
 
