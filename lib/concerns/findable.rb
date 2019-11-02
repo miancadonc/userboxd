@@ -1,9 +1,8 @@
 module Findable
-    module ClassMethods
-    end
+  def find_me!
+    puts "found me!"
+  end
+  
 
-    module InstanceMethods
-    end
-    
 
 end
