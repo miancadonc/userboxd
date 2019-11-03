@@ -8,16 +8,16 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Nat McConnaughay"]
   spec.email         = ["natmcconnaughay@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Allows comparison of the preferences of two letterboxd users.]}
+  spec.description   = %q{This gem scrapes the site letterboxd (letterboxd provides an api on request, and I will be requesting access.). It creates users to display, and logs their rated films on the site. It takes note of the genres and can display decriptive information on the users and their rated films. It can also directly compare two letterboxd users in a small variety of ways, including total films rated.}
+  spec.homepage      = "https://github.com/miancadonc/userboxd"
   spec.license       = "MIT"
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+  spec.metadata["allowed_push_host"] = "https://github.com/miancadonc/userboxd'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata["source_code_uri"] = "https://github.com/miancadonc/userboxd"
+  spec.metadata["changelog_uri"] = "https://github.com/miancadonc/userboxd"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
