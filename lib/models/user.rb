@@ -1,16 +1,11 @@
 load 'lib/concerns/findable.rb'
 load 'lib/concerns/persistable.rb'
+load 'lib/concerns/nameable.rb'
 class User
     attr_accessor :name
     @@all = []
-    extend Persistable::ClassMethods
-    include Persistable::InstanceMethods
-    extend Findable
-
-    def initialize(name)
-        self.name = name
-    end
-
+    extend Persistable::ClassMethods, Findable
+    include Persistable::InstanceMethods, Nameable
 
     def self.all
         @@all
@@ -31,6 +26,5 @@ class User
     def self.create(username)
         new(username).save
     end
-
 
 end

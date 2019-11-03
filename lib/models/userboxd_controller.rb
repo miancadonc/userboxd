@@ -83,7 +83,9 @@ class UserboxdController
         username = gets.strip
         if User.exists?(username) 
             puts "Youv'e already added that user!"
-            input
+            line
+            puts "Would you like to add another user? (y/n)"
+            add_user if get_answer == "y"
         # elsif User.new(username).valid? == false
         #     puts "Looks like that user doesn't exit!"
         #     puts "Would you like to add another user? (y/n)"

@@ -1,5 +1,5 @@
 module Findable
-  def find_me!
+  def find_me
     puts "find me!"
   end
 
