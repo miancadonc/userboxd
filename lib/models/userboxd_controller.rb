@@ -8,10 +8,15 @@ class UserboxdController
         menu_prompt
     end
 
+    def line
+        puts "-----------------------------------------"
+    end
+
+
     def greeting
-        puts "-----------------------------------------"
+        line
         puts "Hello! Welcome to userboxd. Here, you can \nget information on letterboxd users and \ncompare them!"
-        puts "-----------------------------------------"
+        line
     end
 
     def menu_prompt
@@ -23,7 +28,7 @@ class UserboxdController
     end
 
     def input
-        puts "-----------------------------------------"
+        line
         puts "What would you like to do?"
         input = gets.strip.downcase
         valid_input?(input)
@@ -34,23 +39,8 @@ class UserboxdController
     end
 
     def evalutate_input(input)
-        #method = input.gsub(" ","_")
-
-        case input
-        when "exit"
-            exit
-        when "help"
-            help
-        when "add user"
-            add_user
-        when "display users"
-            display_users
-        when "user info"
-            user_info
-        when "compare users"
-            compare_users
-        end
-
+        method = input.gsub(" ","_")
+        self.send("#{method}")
     end
 
     def invalid_input
@@ -88,7 +78,7 @@ class UserboxdController
         input
     end
 
-    def add_user
+    def add_user #NEEDS BETTER OPTIONS TO ADD ANOTHER USER
         puts "Please enter a letterboxd username:"
         username = gets.strip
         if User.exists?(username) 
@@ -101,22 +91,25 @@ class UserboxdController
         else 
             User.create(username)
             puts "#{username} added."
-            puts "-----------------------------------------"
+            line
             puts "Would you like to add another user? (y/n)"
             add_user if get_answer == "y"
         end
     end
 
     def display_users
-        puts "display users"
+        line
+        puts "Here are your added users:"
+        User.all.each {|user| puts "#{user.name}"}
+        input
     end
 
     def user_info
-        puts "user info"
+        puts "user info method here"
     end
 
     def compare_users
-        puts "compare users"
+        puts "compare users method here"
     end
 
 
