@@ -3,7 +3,7 @@ class UserboxdController
     VALID_INPUT = ['help', 'add user', 'display users', 'user info', 'compare users', 'exit']
 
     def start
-        #User.create(mianc)
+        User.create("mianc")
         greeting
         menu_prompt
     end
