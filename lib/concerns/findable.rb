@@ -1,8 +1,8 @@
 module Findable
   def find_me!
-    puts "found me!"
+    puts "find me!"
   end
-  
+
 
 
 end

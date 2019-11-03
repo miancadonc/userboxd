@@ -1,9 +1,11 @@
+load 'lib/concerns/findable.rb'
+load 'lib/concerns/persistable.rb'
 class User
     attr_accessor :name
     @@all = []
-    #extend Persistable::ClassMethods
-    #include Persistable::InstanceMethods
-    #extend Findable
+    extend Persistable::ClassMethods
+    include Persistable::InstanceMethods
+    extend Findable
 
     def initialize(name)
         self.name = name
