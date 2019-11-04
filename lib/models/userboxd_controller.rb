@@ -2,6 +2,7 @@ require 'pry'
 class UserboxdController
 
     VALID_INPUT = ['help', 'add users', 'display users', 'user info', 'compare users', 'clear users', 'exit']
+    BASE_PATH = "https://letterboxd.com/"
 
     def start
         mianc = User.new("mianc")
