@@ -1,9 +1,11 @@
+require 'pry'
 class UserboxdController
 
     VALID_INPUT = ['help', 'add users', 'display users', 'user info', 'compare users', 'exit']
 
     def start
-        User.create("mianc")
+        mianc = User.new("mianc")
+        Opinion.new(mianc,"lotr","great")
         greeting
         menu_prompt
     end
@@ -70,17 +72,13 @@ class UserboxdController
     def exit
         puts "Goodbye!"
         line
+        exit!
     end
 
     def help
         puts "Here's a list of viable commands."
         line
-        puts "display users"
-        puts "add users"
-        puts "user info"
-        puts "compare users"
-        puts "help"
-        puts "exit"
+        VALID_INPUT.each {|command| puts command}
         input
     end
 
@@ -101,7 +99,7 @@ class UserboxdController
         #     puts "Would you like to add another user? (y/n)"
         #     add_user if get_answer == "y"
         else 
-            User.create(username)
+            User.new(username)
             puts "#{username} added."
             get_username
         end
@@ -109,12 +107,11 @@ class UserboxdController
 
 
 
-    def add_users #NEEDS BETTER OPTIONS TO ADD ANOTHER USER
+    def add_users
         line
         puts "Add as many users as you want, adding them one at a time."
         puts "When you're done, type \"done\""
         get_username
-        
     end
 
     def display_users
@@ -125,7 +122,29 @@ class UserboxdController
     end
 
     def user_info
-        puts "user info method here"
+        line
+        puts "What user would you like more info on?"
+        answer = gets.strip
+        user = User.find_by_name(answer)
+        !!User.find_by_name(answer) ? get_info(user) : no_user(answer)
+    end
+
+    def get_info(user)
+        line
+        puts "Here's some more information on #{user.name}."
+        puts "Films watched: #{user.opinions.size}"
+        puts "Genres watched:"
+        puts "Most watched genre:"
+        puts "Reviews left:"
+        puts "Five star rated films:"
+        input
+    end
+
+    def no_user(answer)
+        puts "You haven't added that user yet! Would you like to? (y/n)"
+        user = User.new(answer) if get_answer == "y"
+        get_info(user)
+        input
     end
 
     def compare_users
