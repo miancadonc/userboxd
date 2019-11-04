@@ -9,11 +9,12 @@ class User
     def initialize(name)
         @name = name
         @opinions = []
+        self.save
     end
 
     def add_opinion(opinion)
         self.opinions << opinion
     end
-    
+
 
 end

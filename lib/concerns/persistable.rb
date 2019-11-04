@@ -4,16 +4,12 @@ module Persistable
             base.class_variable_set(:@@all, [])
         end
 
-        def create(object)
-            new(object).save
-        end
-
         def all
             self.class_variable_get(:@@all)
         end
 
         def find_or_create_by_name(name)
-            exists?(name) ? find_by_name(name) : create(name)
+            exists?(name) ? find_by_name(name) : new(name)
         end
 
 
