@@ -229,7 +229,7 @@ class UserboxdController
         name = gets.strip
         if User.exists?(name)
             user = User.find_by_name(name)
-        elsif user == "exit"
+        elsif name == "exit"
             okay
         else
             puts "I'm sorry, that didn't register as a user."
@@ -279,5 +279,22 @@ class UserboxdController
     end
 
     def liked_better(user_1, user_2)
+        line
+        puts "Please type in a film name. \nIt might be easier to copy and paste from a list."
+        movie = gets.strip
+        user_1_opinion = user_1.opinions.find{|o|o.film.name == movie}
+        user_2_opinion = user_2.opinions.find{|o|o.film.name == movie}
+        if !!user_1_opinion && !!user_2_opinion
+            puts "#{user_1} rated #{movie} #{user_1_opinion.rating} while #{user_2} rated it #{user_2_opinion.rating}."
+        elsif !!user_1_opinion && !!user_2_opinion == false
+            puts "Only #{user_1.name} has watched this film!"
+            puts "Better step up your game, #{user_2.name}!"
+        elsif !!user_2_opinion && !!user_1_opinion == false
+            puts "Only #{user_2.name} has watched this film!"
+            puts "Better step up your game, #{user_1.name}!"
+        else
+            puts "Neither user has watched this movie."
+        end
+        input
     end
 end
