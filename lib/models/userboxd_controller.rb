@@ -6,11 +6,13 @@ class UserboxdController
 
     def start
         mianc = User.new("mianc")
-        (1..15).to_a.each do |num|
-            Opinion.new(mianc,"movie #{num}","great")
-        end
+        make_user(mianc)
         greeting
         menu_prompt
+    end
+
+    def make_user(user)
+        Scraper.scrape_profile_page(user)
     end
 
     def line
@@ -112,7 +114,8 @@ class UserboxdController
         #     puts "Would you like to add another user? (y/n)"
         #     add_user if get_answer == "y"
         else 
-            User.new(username)
+            user = User.new(username)
+            make_user(user)
             puts "#{username} added."
             get_username
         end
