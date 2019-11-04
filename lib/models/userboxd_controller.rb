@@ -108,16 +108,14 @@ class UserboxdController
         if User.exists?(username) 
             puts "Youv'e already added that user!"
             get_username
-
-            # elsif User.new(username).valid? == false
-        #     puts "Looks like that user doesn't exit!"
-        #     puts "Would you like to add another user? (y/n)"
-        #     add_user if get_answer == "y"
         else 
-            user = User.new(username)
-            make_user(user)
-            puts "#{username} added."
-            get_username
+            if Scraper.check_page(username) == nil
+                add_users
+            else
+                User.new(username)
+                puts "#{username} added."
+                get_username
+            end
         end
     end
 
