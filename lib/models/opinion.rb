@@ -7,7 +7,8 @@ class Opinion
     def initialize (user, film, rating)
         @user = user
         user.add_opinion(self)
-        @film = film
+        @film = Film.find_or_create_by_name(film)
         @rating = rating
+        self.save
     end
 end
