@@ -27,8 +27,9 @@ class Scraper
         if !!pagination == nil
             
         else
-            html.css(".pagination .paginate-page a").each do |link|
-                html = Nokogiri::HTML(open(BASE_PATH + link.attr("href")))
+            page_number = html.css(".pagination .paginate-page").last.text.to_i
+            (2..page_number).to_a.each do |page|
+                html = Nokogiri::HTML(open(BASE_PATH + "#{user.name}/films/ratings/page/#{page}/"))
                 html.css(".poster-container").each do |poster|
                     rating = poster.css(".poster-viewingdata span").text
                     film = poster.css(".film-poster").css("div").children[1].attr("alt")
