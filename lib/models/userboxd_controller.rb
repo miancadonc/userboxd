@@ -202,10 +202,9 @@ class UserboxdController
 
     def no_user(answer)
         puts "You haven't added that user yet! Would you like to? (y/n)"
-        answer = get_answer
-        if answer == "y"
-            user = User.new(answer) 
-            get_info(user)
+        response = get_answer
+        if response == "y"
+            add_users
         else
             input
         end

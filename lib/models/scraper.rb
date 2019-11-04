@@ -11,8 +11,8 @@ class Scraper
         rescue => e
            puts "THIS USER DOESN'T EXIST!"
            puts "returning to add users . . ."
-           return nil
         end
+        
     end
 
     def self.scrape_profile_page(user)
