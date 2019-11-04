@@ -1,11 +1,13 @@
 require 'pry'
 class UserboxdController
 
-    VALID_INPUT = ['help', 'add users', 'display users', 'user info', 'compare users', 'exit']
+    VALID_INPUT = ['help', 'add users', 'display users', 'user info', 'compare users', 'clear users', 'exit']
 
     def start
         mianc = User.new("mianc")
-        Opinion.new(mianc,"lotr","great")
+        (1..15).to_a.each do |num|
+            Opinion.new(mianc,"movie #{num}","great")
+        end
         greeting
         menu_prompt
     end
@@ -24,7 +26,7 @@ class UserboxdController
     def menu_prompt
         puts "You can add users, display your users," 
         puts "display one user's info, compare two users,"
-        puts "or exit the program."
+        puts "clear your users, or exit the program."
         puts "You can also type help for help typing the commands."
         input
     end
@@ -50,7 +52,14 @@ class UserboxdController
         puts "I'm sorry, but I didn't understand what you wrote."
         puts "Would you like some help? (y/n)"
         line
-        help if get_answer == "y"
+        answer = gets.strip.downcase
+        if  answer == "y"
+            help 
+        elsif answer == "n"
+            okay
+        else
+            invalid_input
+        end
 
     end
 
@@ -59,8 +68,7 @@ class UserboxdController
         if answer == "y" || answer == "yes"
             "y"
         elsif answer == "n" || answer == "no"
-            puts "Okay."
-            input
+            "n"
         elsif answer == "exit"
             exit
         else
@@ -68,6 +76,10 @@ class UserboxdController
         end
     end
 
+    def okay
+        puts "Okay! Returning you to the main menu."
+        input
+    end
 
     def exit
         puts "Goodbye!"
@@ -84,7 +96,7 @@ class UserboxdController
 
     def get_username
         line
-        puts "Please enter a letterboxd username:"
+        puts "Please enter a letterboxd username or type 'done':"
         username = gets.strip
         username == "done" ? input : add_user(username)
     end
@@ -133,27 +145,137 @@ class UserboxdController
         line
         puts "Here's some more information on #{user.name}."
         puts "Films watched: #{user.opinions.size}"
-        puts "Genres watched:"
-        puts "Most watched genre:"
         puts "Reviews left:"
-        puts "Five star rated films:"
+        puts "Five star rated films: "
+        puts "Would you like to see how they felt about a particular film?"
+        user_film(user) if get_answer == "y"
         input
+    end
+
+    def user_film(user)
+        line
+        puts "Here are the films that #{user.name} has rated, 10 at a time."
+        if user.opinions.size == 0
+            puts "This user has no films rated!"
+            okay
+        elsif user.opinions.size <10
+            small_display_films(user)
+        else
+            select_films(user)
+        end
+        puts "Do you want to see more films? If you want to choose a film, type 'n' (y/n)"
+        if get_answer == "y"
+            user_film(user) 
+        else 
+            choose_film(user) 
+        end
+    end
+
+    def small_display_films(user)
+        user.opinions.each.with_index do |opinion, index|
+            puts "#{index}. #{opinion.film.name}"
+        end
+    end
+
+    def select_films(user)
+        puts "To select which 10 appear at a time, type a starting number:"
+        input = gets.strip.to_i - 1
+        display_films(user, input)
+    end
+
+    def display_films(user, input)
+        line
+        user.opinions[input, 10].each.with_index do |opinion, index|
+            puts "#{index+input+1}. #{opinion.film.name}"
+        end
+    end
+
+    def choose_film(user)
+        puts "Please enter the number of the film you want to choose:"
+        input = gets.strip.to_i-1
+        line
+        puts "#{user.name} watched #{user.opinions[input].film.name} and rated it #{user.opinions[input].rating}"
     end
 
     def no_user(answer)
         puts "You haven't added that user yet! Would you like to? (y/n)"
-        user = User.new(answer) if get_answer == "y"
-        get_info(user)
+        answer = get_answer
+        if answer == "y"
+            user = User.new(answer) 
+            get_info(user)
+        else
+            input
+        end
+    end
+
+    def clear_users
+        User.all.clear
+        Opinion.all.clear
         input
     end
 
     def compare_users
-        puts "compare users method here"
+        line
+        puts "Enter user 1:"
+        user_1 = get_user
+        puts "Enter user 2:"
+        user_2 = get_user
+        comparing_users(user_1, user_2)
     end
 
+    def get_user
+        name = gets.strip
+        if User.exists?(name)
+            user = User.find_by_name(name)
+        elsif user == "exit"
+            okay
+        else
+            puts "I'm sorry, that didn't register as a user."
+            puts "Please enter a user or type 'exit'."
+            line
+            get_user
+        end
 
+    end
 
+    def comparing_users(user_1, user_2)
+        puts "You can compare the two users to see who's watched more movies,"
+        puts "Or, you can see who liked a particular movie better."
+        puts "Type 'more movies' or 'liked better' or 'exit'."
+        answer = gets.strip.downcase
+        if answer == 'more movies'
+            more_movies(user_1, user_2)
+        elsif answer == 'liked better'
+            liked_better(user_1, user_2)
+        elsif answer == 'exit'
+            okay
+        else
+            puts "I'm sorry, I didn't understand that."
+            sleep(2)
+            comparing_users(user_1, user_2)
+        end
+    end
 
-    
+    def more_movies(user_1, user_2)
+        line
+        sleep(2)
+        if user_1.opinions.size == user_2.opinions.size
+            puts "Looks like they've both watched #{user_1.opinions.size} movies!"
+            sleep(2)
+            input
+        elsif user_1.opinions.size > user_2.opinions.size
+            puts "Looks like #{user_1.name} is the film genius here!"
+            puts "They've watched #{user_1.opinions.size} films while #{user_2.name} has only watched #{user_2.opinions.size}"
+            sleep(2)
+            input
+        else
+            puts "Looks like #{user_2.name} is the filmg genius here!"
+            puts "They've watched #{user_2.opinions.size} films while #{user_1.name} has only watched #{user_1.opinions.size}"
+            sleep(2)
+            input
+        end
+    end
 
+    def liked_better(user_1, user_2)
+    end
 end
