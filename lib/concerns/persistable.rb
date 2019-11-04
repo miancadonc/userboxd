@@ -8,12 +8,6 @@ module Persistable
             self.class_variable_get(:@@all)
         end
 
-        def find_or_create_by_name(name)
-            exists?(name) ? find_by_name(name) : new(name)
-        end
-
-
-
     end
 
     module InstanceMethods
