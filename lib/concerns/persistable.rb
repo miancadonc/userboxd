@@ -11,7 +11,7 @@ module Persistable
         def all
             self.class_variable_get(:@@all)
         end
-        
+
 
     end
 
@@ -20,6 +20,7 @@ module Persistable
             self.class.all << self
             self
         end
+
     end
     
 
