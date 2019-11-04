@@ -112,7 +112,8 @@ class UserboxdController
             if Scraper.check_page(username) == nil
                 add_users
             else
-                User.new(username)
+                user = User.new(username)
+                make_user(user)
                 puts "#{username} added."
                 get_username
             end
@@ -145,10 +146,10 @@ class UserboxdController
 
     def get_info(user)
         line
+        five_star = user.opinions.select{|o|o.rating == "★★★★★"}.size
         puts "Here's some more information on #{user.name}."
-        puts "Films watched: #{user.opinions.size}"
-        puts "Reviews left:"
-        puts "Five star rated films: "
+        puts "Films rated: #{user.opinions.size}"
+        puts "Five star rated films: #{five_star}"
         puts "Would you like to see how they felt about a particular film?"
         user_film(user) if get_answer == "y"
         input
