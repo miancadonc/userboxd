@@ -281,7 +281,7 @@ class UserboxdController
     def liked_better(user_1, user_2)
         line
         puts "Please type in a film name. \nIt might be easier to copy and paste from a list."
-        movie = gets.strip.capitalize
+        movie = gets.strip.split.collect {|w| w.capitalize}.join(" ")
         user_1_opinion = user_1.opinions.find{|o|o.film.name == movie}
         user_2_opinion = user_2.opinions.find{|o|o.film.name == movie}
         if !!user_1_opinion && !!user_2_opinion
