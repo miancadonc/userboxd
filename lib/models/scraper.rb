@@ -31,7 +31,7 @@ class Scraper
             (2..page_number).to_a.each do |page|
                 html = Nokogiri::HTML(open(BASE_PATH + "#{user.name}/films/ratings/page/#{page}/"))
                 html.css(".poster-container").each do |poster|
-                    rating = poster.css(".poster-viewingdata span").text
+                    rating = poster.css(".poster-viewingdata span").text.strip
                     film = poster.css(".film-poster").css("div").children[1].attr("alt")
                     Film.find_or_create_by_name(film)
                     Opinion.new(user,film,rating)

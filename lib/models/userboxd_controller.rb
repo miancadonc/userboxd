@@ -271,7 +271,7 @@ class UserboxdController
             sleep(2)
             input
         else
-            puts "Looks like #{user_2.name} is the filmg genius here!"
+            puts "Looks like #{user_2.name} is the film genius here!"
             puts "They've watched #{user_2.opinions.size} films while #{user_1.name} has only watched #{user_1.opinions.size}"
             sleep(2)
             input
@@ -285,7 +285,7 @@ class UserboxdController
         user_1_opinion = user_1.opinions.find{|o|o.film.name == movie}
         user_2_opinion = user_2.opinions.find{|o|o.film.name == movie}
         if !!user_1_opinion && !!user_2_opinion
-            puts "#{user_1.name} rated #{movie.name} #{user_1_opinion.rating} while #{user_2} rated it #{user_2_opinion.rating}."
+            puts "#{user_1.name} rated #{user_1_opinion.film.name} #{user_1_opinion.rating} while #{user_2.name} rated it #{user_2_opinion.rating}."
         elsif !!user_1_opinion && !!user_2_opinion == false
             puts "Only #{user_1.name} has watched this film!"
             puts "Better step up your game, #{user_2.name}!"
