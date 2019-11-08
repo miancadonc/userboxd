@@ -1,8 +1,6 @@
 # Userboxd
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/userboxd`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem allows the user to scrape the popular film social media site letterboxd to retrieve and compare user profile data. The gem is basically intended to be a fun tool for comparing the film viewing tendencies of a few friends. It has the ability to get and list all of the films that a user has rated on the site, and it can compare two users directly to display who has rated more movies, and, when given a particular movie, can display which user rated the movie more highly.
 
 ## Installation
 
@@ -32,7 +30,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/userboxd. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/[miancadonc]/userboxd. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -40,4 +38,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Userboxd project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/userboxd/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Userboxd project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[miancadonc]/userboxd/blob/master/CODE_OF_CONDUCT.md).
