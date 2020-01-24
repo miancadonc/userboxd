@@ -1,8 +1,3 @@
-load 'lib/concerns/findable.rb'
-load 'lib/concerns/persistable.rb'
-require 'pry'
-require 'open-uri'
-require 'nokogiri'
 class Scraper
     BASE_PATH = "https://letterboxd.com/"
     def self.check_page(user)

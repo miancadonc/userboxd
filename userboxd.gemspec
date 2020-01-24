@@ -1,6 +1,6 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "/Users/nat/Gems/userboxd/lib/models/version.rb"
+require "/Users/nat/Gems/userboxd/lib/version.rb"
 
 Gem::Specification.new do |spec|
   spec.name          = "userboxd"
@@ -31,6 +31,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  require 'nokogiri'
-  require 'open-uri'
+  spec.add_development_dependency "nokogiri"
+  spec.add_development_dependency "pry"
+  #spec.add_development_dependency "open-uri"
+  
 end
